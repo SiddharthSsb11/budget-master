@@ -24,63 +24,14 @@ const Signup = () => {
 
   const submitHandler = async () => {
     console.log('signup clicked')
-    /* setLoading(true);
-    if (!name || !email || !password || !confirmpassword) {
-      toast({
-        title: "Please Fill all the Feilds",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
-      return;
-    }
-    if (password !== confirmpassword) {
-      toast({
-        title: "Passwords Do Not Match",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      return;
-    }
-
-    console.log(name, email);
-
-    try {
-      const config = {
-        headers: { "Content-type": "application/json" },
-      };
-
-      const { data } = await axios.post( "/api/user", { name, email, password}, config );
-      console.log(data);
-
-      toast({
-        title: "Registration Successful",
-        status: "success",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-
-      localStorage.setItem("userInformation", JSON.stringify(data));
-      setLoading(false);
-      navigate("/chats");
-
-    } catch (error) {
-      console.log(error.message);  
-      toast({
-        title: "Error Occured!",
-        description: error.response.data.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
-    } */
+    navigate("/transactions");
+    toast({
+      title: "Sign-Up Successful",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+  })
   };
     
 
@@ -91,6 +42,8 @@ const Signup = () => {
         <Input
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
+          focusBorderColor='pink.400'
+          errorBorderColor='red.300'
         />
       </FormControl>
       <FormControl id="email" isRequired>
@@ -99,6 +52,8 @@ const Signup = () => {
           type="email"
           placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
+          focusBorderColor='pink.400'
+          errorBorderColor='red.300'
         />
       </FormControl>
       <FormControl id="password" isRequired>
@@ -108,6 +63,8 @@ const Signup = () => {
             type={show ? "text" : "password"}
             placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
+            focusBorderColor='pink.400'
+            errorBorderColor='red.300'
           />
           <InputRightElement width="4.5rem">
             <Button colorScheme='purple' h="1.75rem" size="sm" onClick={handleClick}>
@@ -123,6 +80,8 @@ const Signup = () => {
             type={show ? "text" : "password"}
             placeholder="Confirm password"
             onChange={(e) => setConfirmpassword(e.target.value)}
+            focusBorderColor='pink.400'
+            errorBorderColor='red.300'
           />
           <InputRightElement width="4.5rem">
             <Button colorScheme='purple' h="1.75rem" size="sm" onClick={handleClick}>

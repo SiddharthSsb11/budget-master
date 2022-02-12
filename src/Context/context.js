@@ -4,7 +4,7 @@ import React, { useReducer } from 'react';
 
 
 const Provider = ({ children }) => {
-    
+
   const [transactions, dispatch] = useReducer(contextReducer, initialState);
 
   const deleteTransaction = (id) => {
@@ -19,8 +19,7 @@ const Provider = ({ children }) => {
   console.log(balance, 'balance');
 
   return (
-    <BudgetContext.Provider value={{ transactions, balance, deleteTransaction, addTransaction }}
-    >
+    <BudgetContext.Provider value={{ transactions, balance, deleteTransaction, addTransaction }}>
       {children}
     </BudgetContext.Provider>
   );

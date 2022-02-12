@@ -7,7 +7,7 @@ const contextReducer = (state, action) => {
 
         transactions = state.filter((transaction) => transaction.id !== action.payload);
   
-        //localStorage.setItem('transactions', JSON.stringify(transactions));
+        localStorage.setItem('transactions', JSON.stringify(transactions));
         console.log(transactions,'deleting a transaction');
         return transactions;
 
@@ -15,7 +15,7 @@ const contextReducer = (state, action) => {
 
         transactions = [action.payload, ...state];
   
-        //localStorage.setItem('transactions', JSON.stringify(transactions));
+        localStorage.setItem('transactions', JSON.stringify(transactions));
         console.log(transactions,'adding a transaction');
         return transactions;
 

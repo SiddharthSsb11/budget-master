@@ -21,52 +21,15 @@ const Login = () => {
   const handleClick = () => setShow(!show);
 
   const submitHandler = async () => {
-      console.log('Login Clicked')
-    /* setLoading(true);
-    if (!email || !password) {
-      toast({
-        title: "Please Fill all the Feilds",
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
-      return;
-    }
-
-    // console.log(email, password);
-    try {
-      const config = {
-        headers: { "Content-type": "application/json" },
-      };
-
-      const { data } = await axios.post( "/api/user/login", { email, password }, config);
-
-      // console.log(JSON.stringify(data));
+      console.log('Login Clicked');
+      navigate("/transactions")
       toast({
         title: "Login Successful",
         status: "success",
         duration: 5000,
         isClosable: true,
         position: "bottom",
-      });
-
-      localStorage.setItem("userInformation", JSON.stringify(data));
-      setLoading(false);
-      navigate("/chats");
-
-    } catch (error) {
-      toast({
-        title: "Error Occured!",
-        description: error.response.data.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setLoading(false);
-    } */
+    })
   };
 
   return (
@@ -76,8 +39,10 @@ const Login = () => {
         <Input
           value={email}
           type="email"
+          focusBorderColor='pink.400'
           placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
+          errorBorderColor='red.300'
         />
       </FormControl>
       <FormControl id="password" isRequired>
@@ -85,9 +50,11 @@ const Login = () => {
         <InputGroup size="md">
           <Input
             value={password}
+            focusBorderColor='pink.400'
             onChange={(e) => setPassword(e.target.value)}
             type={show ? "text" : "password"}
             placeholder="Enter password"
+            errorBorderColor='red.300'
           />
           <InputRightElement width="4.5rem">
             <Button  colorScheme='purple' h="1.75rem" size="sm" onClick={handleClick}>

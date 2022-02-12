@@ -7,23 +7,10 @@ import {
   expenseCategories,
 } from "../../../constants/categories";
 import { BudgetContext } from "../../../context/budget-context";
-import { Box, Text } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
+import { NumberInput, NumberInputField } from "@chakra-ui/react";
+import { FormControl, FormLabel } from "@chakra-ui/react";
 import {
-  Heading,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-} from "@chakra-ui/react";
-import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-} from "@chakra-ui/react";
-import {
-  Input,
   InputGroup,
   InputRightElement,
   InputLeftElement,
@@ -32,6 +19,8 @@ import { Select } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { CalendarIcon } from "@chakra-ui/icons";
 import { SingleDatepicker } from "chakra-dayzed-datepicker";
+import { useToast } from "@chakra-ui/toast";
+
 
 const initialState = {
   amount: "",
@@ -44,11 +33,12 @@ const Form = () => {
   const [formData, setFormData] = useState(initialState);
   const [datePicker, setDatePicker] = useState(new Date());
 
-  console.log('date',formatDate(datePicker));
+  console.log("date", formatDate(datePicker));
 
-  const { segment } = useSpeechContext();
+  //const { segment } = useSpeechContext();
 
   const { addTransaction } = useContext(BudgetContext);
+  const toast = useToast();
 
   console.log(formData, "formData state");
 
@@ -71,8 +61,33 @@ const Form = () => {
   };
 
   const createTransaction = () => {
-    setFormData({ ...formData, date: formatDate(datePicker) })
+    setFormData({ ...formData, date: formatDate(datePicker) });
     console.log("Created Transaction", formData);
+
+    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-"))
+      return;
+
+    if (incomeCategories.map((iC) => iC.type).includes(formData.category)) {
+      setFormData({ ...formData, type: "Income" });
+    } else if (
+      expenseCategories.map((iC) => iC.type).includes(formData.category)
+    ) {
+      setFormData({ ...formData, type: "Expense" });
+    }
+
+    toast({
+      title: "Transaction Successful",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+      position: "bottom",
+    });
+    addTransaction({
+      ...formData,
+      amount: Number(formData.amount),
+      id: uuidv4(),
+    });
+    setFormData(initialState);
   };
 
   return (
@@ -96,7 +111,7 @@ const Form = () => {
           //bg="purple"
           cursor="pointer"
           border="2px solid"
-          focusBorderColor='pink.500'
+          focusBorderColor="pink.500"
         >
           <option
             value="Income"
@@ -120,7 +135,7 @@ const Form = () => {
           onChange={categoryHandler}
           cursor="pointer"
           border="2px solid"
-          focusBorderColor='pink.500'
+          focusBorderColor="pink.500"
         >
           {selectedCategories.map((c) => (
             <option
@@ -134,10 +149,10 @@ const Form = () => {
         </Select>
       </FormControl>
 
-      <FormControl width="47%" >
+      <FormControl width="47%">
         <FormLabel htmlFor="amount">Amount</FormLabel>
         <NumberInput max={50000000000} min={1}>
-          <InputGroup focusBorderColor='pink.500' >
+          <InputGroup focusBorderColor="pink.500">
             <InputLeftElement
               pointerEvents="none"
               color="gray.300"
@@ -156,21 +171,20 @@ const Form = () => {
         </NumberInput>
       </FormControl>
 
-      <FormControl width="47%" >
+      <FormControl width="47%">
         <FormLabel htmlFor="date">Date</FormLabel>
-        <InputGroup focusBorderColor='pink.500' color= "gray.500">
-          <SingleDatepicker 
-            style={{border:"2px solid", color: "gray" }}
+        <InputGroup focusBorderColor="pink.500" color="gray.500">
+          <SingleDatepicker
+            style={{ border: "2px solid", color: "gray" }}
             name="date"
             date={datePicker}
             onDateChange={setDatePicker}
           />
           <InputRightElement
-            
             pointerEvents="none"
             //color="black"
             fontSize="1em"
-            children={<CalendarIcon  color="gray.300" />}
+            children={<CalendarIcon color="gray.300" />}
           />
         </InputGroup>
       </FormControl>

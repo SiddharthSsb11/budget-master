@@ -47,7 +47,7 @@ const HomePage = () => {
       <Box bg="purple.50" w="100%" p={4} borderRadius="lg" borderColor="black" borderWidth="1px">
         <Tabs isFitted variant="soft-rounded" colorScheme="pink">
           <TabList mb="1em">
-            <Tab fontWeight="bold">Login</Tab>
+            <Tab fontWeight="bold" >Login</Tab>
             <Tab fontWeight="bold">Sign Up</Tab>
           </TabList>
           <TabPanels>
