@@ -4,7 +4,7 @@ import { Heading } from "@chakra-ui/react";
 //import { useSpeechContext } from '@speechly/react-client';
 import { BudgetContext } from "../../context/budget-context";
 import Form from "./Form/Form";
-import TransactionList from "./List/TransactionList";
+//import TransactionList from "./List/TransactionList";
 import InfoCard from "../InfoCard";
 import { Button } from "@chakra-ui/button";
 
@@ -52,33 +52,16 @@ const Main = () => {
         /* bg="green.200" */ width="100%"
         justifyContent="center"
         alignItems="center"
+        marginBottom="4px"
       >
         <Form mt={1} />
       </Box>
 
-      <Box width="98.5%">
-        <Button
-          fontWeight="bold"
-          fontSize="lg"
-          variant="solid"
-          colorScheme="purple"
-          width="100%"
-          style={{ marginBottom: "0.25em", padding: ".8em" }}
-          onClick={() => {}}
-        >Transaction List</Button>
-      </Box>
+      
     </Box>
   );
 };
 
 export default Main;
 
-/* <Box
-  width="100%"
-  d="flex"
-  alignItems="center"
-  justifyContent="center"
-  bg="blue.200"
->
-  <TransactionList />
-</Box>; */
+

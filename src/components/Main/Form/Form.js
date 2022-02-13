@@ -64,8 +64,17 @@ const Form = () => {
     setFormData({ ...formData, date: formatDate(datePicker) });
     console.log("Created Transaction", formData);
 
-    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-"))
-      return;
+    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-") || (Number(formData.amount) < 1)) {
+      toast({
+        title: "Pleae enter Required Details",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return
+    }
+      
 
     if (incomeCategories.map((iC) => iC.type).includes(formData.category)) {
       setFormData({ ...formData, type: "Income" });
