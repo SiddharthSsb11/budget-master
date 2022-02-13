@@ -33,7 +33,7 @@ const Form = () => {
   const [formData, setFormData] = useState(initialState);
   const [datePicker, setDatePicker] = useState(new Date());
 
-  console.log("date", formatDate(datePicker));
+  //console.log("date", formatDate(datePicker));
 
   //const { segment } = useSpeechContext();
 
@@ -194,7 +194,7 @@ const Form = () => {
         fontSize="lg"
         colorScheme="pink"
         width="100%"
-        style={{ marginTop: "0.5em", padding: "1.2em" }}
+        style={{ marginTop: "0.25em", padding: ".8em" }}
         onClick={createTransaction}
       >
         Create Transaction

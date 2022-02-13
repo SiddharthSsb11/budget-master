@@ -4,7 +4,8 @@ import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import { VStack } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
-//import axios from "axios";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 
 
@@ -23,15 +24,64 @@ const Signup = () => {
   const handleClick = () => setShow(!show);
 
   const submitHandler = async () => {
-    console.log('signup clicked')
-    navigate("/transactions");
-    toast({
-      title: "Sign-Up Successful",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-      position: "bottom",
-  })
+    setLoading(true);
+
+    console.log('signup button clicked');
+
+    if (!name || !email || !password || !confirmpassword) {
+      toast({
+        title: "Please Fill all the Feilds",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+
+    if (password !== confirmpassword) {
+      toast({
+        title: "Passwords Do Not Match",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+
+    console.log(name, email,'on Signup name email');
+    
+    try{
+
+      const result = await createUserWithEmailAndPassword( auth, email, password, name );
+
+      toast({
+        title: `Sign-Up Successful.`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+
+      console.log(result, "userInfo on sign up");
+
+      setLoading(false);
+      navigate("/transactions");
+
+    }catch(error){
+      console.log(error.message);  
+      toast({
+        title: "Error Occured!",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
   };
     
 

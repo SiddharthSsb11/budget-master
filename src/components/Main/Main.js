@@ -6,6 +6,7 @@ import { BudgetContext } from "../../context/budget-context";
 import Form from "./Form/Form";
 import TransactionList from "./List/TransactionList";
 import InfoCard from "../InfoCard";
+import { Button } from "@chakra-ui/button";
 
 const Main = () => {
   const { balance } = useContext(BudgetContext);
@@ -34,7 +35,7 @@ const Main = () => {
         Balance: ₹{balance}{" "}
       </Heading>
 
-      <Box /* bg="red.200" */ width="97%" >
+      <Box /* bg="red.200" */ width="97%">
         <Text
           style={{ lineHeight: "1.5em", marginTop: "3px" }}
           paddingBottom={4}
@@ -42,22 +43,42 @@ const Main = () => {
           color="gray.200"
           fontWeight="bold"
         >
-          <InfoCard /* style={{  paddingBottom: "10px"}} *//>
-        </Text> 
-      </Box>
-      
-      <Box d="flex" /* bg="green.200" */ width="100%" justifyContent="center" alignItems="center">
-        <Form mt={1} />
-      </Box> 
-      
-      <Box width="100%" d="flex" alignItems="center" justifyContent="center"
-        bg="blue.200" 
-      >
-        <TransactionList />
+          <InfoCard /* style={{  paddingBottom: "10px"}} */ />
+        </Text>
       </Box>
 
+      <Box
+        d="flex"
+        /* bg="green.200" */ width="100%"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Form mt={1} />
+      </Box>
+
+      <Box width="98.5%">
+        <Button
+          fontWeight="bold"
+          fontSize="lg"
+          variant="solid"
+          colorScheme="purple"
+          width="100%"
+          style={{ marginBottom: "0.25em", padding: ".8em" }}
+          onClick={() => {}}
+        >Transaction List</Button>
+      </Box>
     </Box>
   );
 };
 
 export default Main;
+
+/* <Box
+  width="100%"
+  d="flex"
+  alignItems="center"
+  justifyContent="center"
+  bg="blue.200"
+>
+  <TransactionList />
+</Box>; */
