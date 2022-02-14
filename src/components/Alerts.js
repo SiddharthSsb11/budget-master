@@ -72,7 +72,7 @@ const Alerts = () => {
           _hover={{ background: "yellow.300", color: "black" }}
           _active={{ background: "yellow.300", color: "black" }}
         >
-          {user ? "Continue Managing Budget" : "Please Login First"}
+          {user ? "Continue to Managing your Budget" : "Continue to Login"}
         </Button>
       </Alert>
     </Container>

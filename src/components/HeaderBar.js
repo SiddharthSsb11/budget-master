@@ -27,12 +27,14 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 
 const HeaderBar = () => {
-  const { balance, user } = useContext(BudgetContext);
 
   const navigate = useNavigate();
   const toast = useToast();
 
+  const { balance, user } = useContext(BudgetContext);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
 
   const logoutHandler = () => {
     signOut(auth);
@@ -169,7 +171,7 @@ const HeaderBar = () => {
               borderWidth="2px"
               bg="pink.600"
               color="gray.100"
-              //src={user.photoURL || user.name}
+              //src={user.photoURL}
               //name={user.name}
               fontFamily="Work sans bold"
               _hover={{ background: "purple", color: "gray.200" }}
@@ -188,7 +190,8 @@ const HeaderBar = () => {
                 fontFamily="Work sans bold"
                 color="gray.700"
               >
-                {/* user.email */}
+                {/* user.displayName || user.email || "" */}
+                {user.email}
               </Heading>
             </Box>
             <Badge
