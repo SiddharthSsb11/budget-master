@@ -2,13 +2,16 @@ import { BudgetContext, initialState} from "./budget-context";
 import contextReducer from './contextReducer';
 import React, { useReducer, useState, useEffect}  from 'react';
 import { onAuthStateChanged } from "firebase/auth"; //from fb 
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
+//import { useDisclosure } from "@chakra-ui/hooks";
+
 
 const Provider = ({ children }) => {
 
   const [transactions, dispatch] = useReducer(contextReducer, initialState);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
 
+  //const { isOpen, /* onOpen, onClose */ } = useDisclosure();
 
   const deleteTransaction = (id) => {
     dispatch({ type: 'DELETE_TRANSACTION', payload: id });
@@ -26,10 +29,12 @@ const Provider = ({ children }) => {
     onAuthStateChanged(auth, (user) => { //CB arg inbuilt from fb
       if (user) setUser(user);
       else setUser(null);
-      console.log('user check uid, name, email', user);
+      
     });
     
   }, []);
+
+  console.log('user check uid, name, email', user);
 
   return (
     <BudgetContext.Provider value={{ transactions, balance, deleteTransaction, addTransaction, user }}>

@@ -87,7 +87,7 @@ const Form = () => {
     toast({
       title: "Transaction Successful",
       status: "success",
-      duration: 5000,
+      duration: 3000,
       isClosable: true,
       position: "bottom",
     });
@@ -203,7 +203,7 @@ const Form = () => {
         fontSize="lg"
         colorScheme="pink"
         width="100%"
-        style={{ marginTop: "0.25em", padding: ".8em" }}
+        style={{ marginTop: "0.25em", padding: ".5em" }}
         onClick={createTransaction}
       >
         Create Transaction

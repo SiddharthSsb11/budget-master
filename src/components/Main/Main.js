@@ -11,6 +11,10 @@ import { Button } from "@chakra-ui/button";
 const Main = () => {
   const { balance } = useContext(BudgetContext);
 
+ /*  const transactionsHandler = ()=>{
+    //console.log("Transactions List")
+    return isOpen
+  } */
   return (
     <Box
       d="flex"
@@ -37,11 +41,11 @@ const Main = () => {
 
       <Box /* bg="red.200" */ width="97%">
         <Text
-          style={{ lineHeight: "1.5em", marginTop: "3px" }}
+          style={{ lineHeight: "1.3em", marginTop: "1px" }}
           paddingBottom={4}
           borderBottom="2px solid #A0AEC0"
           color="gray.200"
-          fontWeight="bold"
+          //fontWeight="bold"
         >
           <InfoCard /* style={{  paddingBottom: "10px"}} */ />
         </Text>
@@ -56,12 +60,9 @@ const Main = () => {
       >
         <Form mt={1} />
       </Box>
-
       
     </Box>
   );
 };
 
 export default Main;
-
-
