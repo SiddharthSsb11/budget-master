@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
@@ -7,6 +7,7 @@ import { useToast } from "@chakra-ui/toast";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { BudgetContext } from "../../context/budget-context";
 
 
 const Signup = () => {
@@ -17,6 +18,10 @@ const Signup = () => {
   const [confirmpassword, setConfirmpassword] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+
+
+  const { user } = useContext(BudgetContext);
+
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -146,8 +151,9 @@ const Signup = () => {
         style={{ marginTop: '15px', fontWeight: 'bold' }}
         onClick={submitHandler}
         isLoading={loading}
+        disabled={user}
       >
-        Sign Up
+      {user ? "Already Loged In !!" :'Signup'}
       </Button>
     </VStack>
   );

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
+import { BudgetContext } from "../../context/budget-context";
 import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
@@ -9,11 +9,14 @@ import { auth } from "../../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
+
 const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+
+  const { user } = useContext(BudgetContext);
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -22,8 +25,9 @@ const Login = () => {
 
   const submitHandler = async () => {
     setLoading(true);
-
-    if (!email || !password) {
+    if(user){
+      navigate("/transactions")
+    }else if(!email || !password){
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
@@ -34,6 +38,7 @@ const Login = () => {
       setLoading(false);
       return;
     }
+    
 
     console.log(email, password);
 
@@ -109,19 +114,22 @@ const Login = () => {
         style={{ marginTop: "15px" }}
         onClick={submitHandler}
         isLoading={loading}
+        //disabled={user}
       >
-        Login
+        {user ? "Already Loged In !! Click here to Go Back !!" :'Login'}
       </Button>
       <Button fontWeight="bold"
         variant="solid"
         colorScheme="purple"
         width="100%"
+        disabled={user}
         onClick={() => {
         setEmail("guest@test.com");
         setPassword("guesttest");
       }}
     >
-      Guest User Login
+      {user ? "Already Loged In !!" :'Guest User Login'}
+
     </Button>
     </VStack>
   );
