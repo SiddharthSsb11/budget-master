@@ -14,6 +14,10 @@ please open an issue first to discuss what you would like to change.
 
 ```
 
+### Few Screenshots
+
+![Homepage](/screenshots/master.png "Homepage")
+
 ## Install Dependencies
 
 ```bash
