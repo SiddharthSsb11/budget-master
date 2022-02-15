@@ -5,7 +5,7 @@ const isIncome = Math.round(Math.random());
 const InfoCard = () => {
   return (
     <div elevation={3} style={{ textAlign: 'center', padding: '0 10%' }}>
-      Try Saying: ( pending WIP Feature) <br /> 
+      <u><strong> Try Saying:</strong></u> &nbsp;  
       Add {isIncome ? 'Income ' : 'Expense '} 
       for {isIncome ? '₹1000 ' : '₹500 '}  
       in Category {isIncome ? 'Salary ' : 'Rent '}
