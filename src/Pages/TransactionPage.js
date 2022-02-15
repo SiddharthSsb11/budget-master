@@ -27,7 +27,7 @@ const TransactionPage = () => {
             alignItems="center"
             width="100%"
             p={6}
-            mt={3}
+            mt={1}
             flexDir={{ base: "column", md: "row" }}
             gap={{ base: "9", md: "3" }}
             //h="75vh"

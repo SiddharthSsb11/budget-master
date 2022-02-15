@@ -70,7 +70,7 @@ const Signup = () => {
         position: "bottom",
       });
 
-      console.log(result, "userInfo on sign up");
+      ///console.log(result, "userInfo on sign up");
 
       setLoading(false);
       navigate("/transactions");

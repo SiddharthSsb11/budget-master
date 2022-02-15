@@ -12,6 +12,13 @@ export const initialState = JSON.parse(
     id: "44c68123-5b86-4cc8-b915-bb9e16cebe6a",
   },
   {
+    amount: 250,
+    category: "Fuel",
+    type: "Expense",
+    date: "2022-01-30",
+    id: "c5647dde-d857-463d-8b4e-1c866cc5f83e",
+  },
+  {
     amount: 125,
     category: "Gifts",
     type: "Income",
@@ -25,13 +32,7 @@ export const initialState = JSON.parse(
     date: "2022-01-23",
     id: "270304a8-b11d-4e16-9341-33df641ede64",
   },
-  {
-    amount: 250,
-    category: "Fuel",
-    type: "Expense",
-    date: "2022-01-30",
-    id: "c5647dde-d857-463d-8b4e-1c866cc5f83e",
-  },
+ 
   {
     amount: 120,
     category: "Travel",
@@ -57,7 +58,7 @@ export const initialState = JSON.parse(
   },
   {
     amount: 105,
-    category: "Savings",
+    category: "Business",
     type: "Income",
     date: "2022-01-28",
     id: "037a35a3-40ec-4212-abe0-cc485a98aeee",

@@ -29,7 +29,7 @@ please open an issue first to discuss what you would like to change.
 
 - User Profile.
 - Login & Signup.
-- Income and expenses profiles are graphically represented for quick understanding.
+- Incomes and expenses profiles are graphically represented for quick understanding ad easy categorical comparison.
 - Authenticated user can access the CRUD functionality. 
 - Manageable transaction list.
 - All the data is stored and saved i.e. <i>persistent</i>
