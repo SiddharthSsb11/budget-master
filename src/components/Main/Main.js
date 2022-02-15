@@ -60,7 +60,6 @@ const Main = () => {
       >
         <Form mt={1} />
       </Box>
-      
     </Box>
   );
 };

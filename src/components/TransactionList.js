@@ -12,38 +12,18 @@ const TransactionList = () => {
   const { transactions, deleteTransaction } = useContext(BudgetContext);
   const toast = useToast();
   
-/*   const transactions = [
-    {
-      amount: 120,
-      category: "Travel",
-      type: "Expense",
-      date: "2022-01-30",
-      id: "0f72e66e-e144-4a72-bbc1-c3c92018635e",
-    },
-
-    {
-      amount: 420,
-      category: "Rent",
-      type: "Expense",
-      date: "2022-01-31",
-      id: "365a4ebd-9892-4471-ad55-36077e4121a9",
-    },
-
-    {
-      amount: 300,
-      category: "Rental Income",
-      type: "Income",
-      date: "2022-01-29",
-      id: "ef090181-21d1-4568-85c4-5646232085b2",
-    },
-    {
-      amount: 105,
-      category: "Savings",
-      type: "Income",
-      date: "2022-01-28",
-      id: "037a35a3-40ec-4212-abe0-cc485a98aeee",
-    },
-  ]; */
+  const deleteHandler = (id)=>{
+      console.log("delete clicked", id);
+      deleteTransaction(id);
+      //() => deleteTransaction(transaction.id);
+      toast({
+        title: "Transaction Deleted",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom-right",
+      });
+  } 
 
   return (
     <Box
@@ -137,7 +117,7 @@ const TransactionList = () => {
               _hover={{ background: "gray.800", color: "red.500" }}
               aria-label="Delete Transaction"
               icon={<DeleteIcon />}
-              onClick={() => deleteTransaction(transaction.id)}
+              onClick={ deleteHandler.bind(null, transaction.id)}
             />
           </ListItem>
         ))}

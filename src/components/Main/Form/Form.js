@@ -67,7 +67,7 @@ const Form = () => {
 
     if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-") || (Number(formData.amount) < 1)) {
       toast({
-        title: "Oops !! Pleae enter the new Transaction Details Again",
+        title: "Oops!! Please check & enter new Transaction Details Again",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -98,6 +98,8 @@ const Form = () => {
       amount: Number(formData.amount),
       id: uuidv4(),
     });
+
+    
 
     setDatePicker(new Date());
 
