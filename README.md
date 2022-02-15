@@ -3,11 +3,11 @@
 > Track your income and expenses in one place via detailed graphical information to manage your budget.
 
 Manage your budget and transactions.
-Add income & expense and compare your transactions throught their percentage 
-contribution in your income and expenses via easy & descriptive graphical represented data.
-Keep a record of your transactions and manage them  in the user profile section.
+Add income & expense and compare your transactions throught their respective percentage 
+contribution via easy & descriptive graphically represented data.
+Keep a record of your transactions and manage them to save down the road.
 
-**Its simple yet sooths your eye, fully featured and easy to use application**
+**Its simple, discriptive and easy to use application**
 
 Made using [React JS](https://reactjs.org/docs/getting-started.html). This application is powered by [Firebase](https://firebase.google.com/)
 
@@ -24,15 +24,18 @@ please open an issue first to discuss what you would like to change.
 ### Few Screenshots
 
 ![Homepage](/screenshots/master.png "Homepage")
+![TransactionPage](/screenshots/2.png "TransactionPage")
+![UserDrawer](/screenshots/3.png "UserDrawer")
 
 ## Features
 
 - User Profile.
 - Login & Signup.
-- Incomes and expenses profiles are graphically represented for quick understanding ad easy categorical comparison.
+- Incomes and expenses profiles are graphically represented for quick understanding and easy categorical comparison.
 - Authenticated user can access the CRUD functionality. 
-- Manageable transaction list.
+- Manageable transactions list.
 - All the data is stored and saved i.e. <i>persistent</i>
+- Fully Responsive.
 
 
 ## Tech Stack
