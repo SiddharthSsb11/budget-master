@@ -2,7 +2,7 @@
 
 > Track your income and expenses in one place via detailed graphical information to manage your budget.
 
-Made using [React JS](https://reactjs.org/docs/getting-started.html).
+Made using [React JS](https://reactjs.org/docs/getting-started.html). This application is powered by [Firebase](https://firebase.google.com/)
 
 This is a _responsive web application_ for viewing in both Mobile and Desktop.
 
@@ -17,6 +17,21 @@ please open an issue first to discuss what you would like to change.
 ### Few Screenshots
 
 ![Homepage](/screenshots/master.png "Homepage")
+
+## Features
+
+- User Profile.
+- Google Login.
+- Full featured wishlist functionality.
+- Graphical data representation feature.
+- Authenticated user can access the CRUD functionality. 
+- Top crytpocurrency carousel.
+- All the data is stored in the firebase firestore database i.e. <i>persistent</i>
+
+
+## Tech Stack
+
+ReactJS, ChartJS, Material-UI, Firebase as a Backend Service, Firestore Database, Context 
 
 ## Install Dependencies
 
