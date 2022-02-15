@@ -65,7 +65,7 @@ const Form = () => {
     setFormData({ ...formData, date: formatDate(datePicker) });
     //console.log("Created Transaction", formData);
 
-    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-") || (Number(formData.amount) < 1)) {
+    if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-") || (Number(formData.amount) < 1) || (formData.category.length===0))  {
       toast({
         title: "Oops!! Please check & enter new Transaction Details Again",
         status: "warning",
@@ -99,7 +99,7 @@ const Form = () => {
       id: uuidv4(),
     });
 
-    
+
 
     setDatePicker(new Date());
 
@@ -146,6 +146,7 @@ const Form = () => {
         <FormLabel htmlFor="category">Category</FormLabel>
         <Select
           id="category"
+          //placeholder="Category"
           value={formData.category}
           onChange={categoryHandler}
           cursor="pointer"
