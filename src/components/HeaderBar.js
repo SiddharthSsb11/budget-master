@@ -1,15 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { BudgetContext } from "../context/budget-context";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, Text } from "@chakra-ui/layout";
-import {
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
-} from "@chakra-ui/menu";
 import {
   Drawer,
   DrawerBody,
@@ -25,16 +18,15 @@ import { Avatar } from "@chakra-ui/avatar";
 import { useToast } from "@chakra-ui/toast";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
+import TransactionList from "./TransactionList";
 
 const HeaderBar = () => {
-
   const navigate = useNavigate();
   const toast = useToast();
 
   const { balance, user } = useContext(BudgetContext);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-
 
   const logoutHandler = () => {
     signOut(auth);
@@ -61,7 +53,8 @@ const HeaderBar = () => {
         p="0.32em 2em"
         borderWidth="0.2em"
         borderColor="gray.300"
-        bg="#0F3057"
+        //bg="#0F3057"
+        bg="purple.900"
       >
         <Box
           d="flex"
@@ -75,7 +68,7 @@ const HeaderBar = () => {
             w={{ base: 8, md: 10 }}
             h={{ base: 8, md: 10 }}
             color="gray.200"
-            _hover={{ color: "purple.200" }}
+            _hover={{ color: "pink.200" }}
           />
           <Box
             d={{ base: "none", md: "flex" }}
@@ -87,7 +80,7 @@ const HeaderBar = () => {
               variant="solid"
               colorScheme="gray"
               fontSize="xs"
-              _hover={{ background: "purple.100", color: "gray.800" }}
+              _hover={{ background: "pink.300", color: "gray.800" }}
             >
               Powered by
             </Badge>
@@ -95,7 +88,7 @@ const HeaderBar = () => {
               variant="solid"
               colorScheme="gray"
               fontSize="sm"
-              _hover={{ background: "purple.100", color: "gray.800" }}
+              _hover={{ background: "pink.300", color: "gray.800" }}
             >
               {" "}
               Speechly
@@ -109,7 +102,7 @@ const HeaderBar = () => {
           cursor="pointer"
           color="gray.200"
           fontFamily="Work sans bold"
-          _hover={{ color: "purple.100" }}
+          _hover={{ color: "pink.200" }}
         >
           Budget Master
         </Text>
@@ -118,7 +111,7 @@ const HeaderBar = () => {
             fontWeight="bold"
             colorScheme="pink"
             //style={{ marginTop: "15px" }}
-            onClick={()=>navigate('/')}
+            onClick={() => navigate("/")}
           >
             Login
           </Button>
@@ -143,12 +136,13 @@ const HeaderBar = () => {
 
       <Drawer placement="right" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
-        <DrawerContent /* fontFamily="Work sans bold" */ bg="purple.100">
+        <DrawerContent /* fontFamily="Work sans bold" */ bg="purple.200">
           <DrawerHeader
             textAlign="center"
             borderBottom="2px solid white"
-            fontSize="2xl"
-            bg="#0F3057"
+            //fontSize="2xl"
+            //bg="#0F3057"
+            bg="purple.900"
             color="gray.200"
           >
             <Heading as="h2" size="xl" fontFamily="Work sans bold">
@@ -159,56 +153,38 @@ const HeaderBar = () => {
             d="flex"
             flexDir="column"
             alignItems="center"
-            gap="1.2em"
-            justifyContent="start"
+            gap="0.3em"
+            justifyContent="space-evenly"
           >
             <Avatar
-              marginTop="5px"
-              fontWeight="bold"
-              size="2xl"
+              //marginTop="2px"
+              //fontWeight="bold"
+              //size="2xl"
               cursor="pointer"
               borderColor="black"
               borderWidth="2px"
-              bg="pink.600"
-              color="gray.100"
+              bg="purple.800"
+              w={36}
+              h={36}
+              //color="gray.100"
               //src={user.photoURL}
               //name={user.name}
-              fontFamily="Work sans bold"
-              _hover={{ background: "purple", color: "gray.200" }}
+              _hover={{ background: "pink.600", color: "gray.200" }}
             />
 
-            <Box
-              d="flex"
-              flexDir="column"
-              gap="0.6em"
-              textAlign="center"
+            <Heading
+              as="h3"
+              size="md"
               fontFamily="Work sans bold"
+              textDecoration="underline"
+              color="gray.800"
             >
-              <Heading
-                as="h3"
-                size="lg"
-                fontFamily="Work sans bold"
-                color="gray.700"
-              >
-                {/* user.displayName || user.email || "" */}
-                {user.email}
-              </Heading>
-            </Box>
-            <Badge
-              variant="solid"
-              bg="purple"
-              fontSize="lg"
-              p={2}
-              width="100%"
-              borderRadius="10px"
-              fontWeight="bold"
-              cursor="pointer"
-              textAlign="center"
-              _hover={{ color: "pink.100" }}
-            >
-              Balance - ₹{balance}
-            </Badge>
+              {/* user.displayName || user.email || "" */}
+              {user.email}
+            </Heading>
+            <Box width="100%" ><TransactionList /></Box>
           </DrawerBody>
+
           <DrawerFooter>
             <Button
               variant="solid"
@@ -216,8 +192,10 @@ const HeaderBar = () => {
               width="100%"
               fontWeight="bold"
               colorScheme="pink"
+              //bg="purple.800"
               fontSize="xl"
-              p={4}
+              color="gray.200"
+              p={1.5}
             >
               Logout
             </Button>
