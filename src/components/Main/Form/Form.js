@@ -23,7 +23,7 @@ import { useToast } from "@chakra-ui/toast";
 
 
 const initialState = {
-  amount: "",
+  amount: 0,
   category: "",
   type: "Income",
   date: formatDate(new Date()),
@@ -32,6 +32,7 @@ const initialState = {
 const Form = () => {
   const [formData, setFormData] = useState(initialState);
   const [datePicker, setDatePicker] = useState(new Date());
+  //const [amount, setAmount] = useState(Number);
 
   //console.log("date", formatDate(datePicker));
 
@@ -62,11 +63,11 @@ const Form = () => {
 
   const createTransaction = () => {
     setFormData({ ...formData, date: formatDate(datePicker) });
-    console.log("Created Transaction", formData);
+    //console.log("Created Transaction", formData);
 
     if (Number.isNaN(Number(formData.amount)) || !formData.date.includes("-") || (Number(formData.amount) < 1)) {
       toast({
-        title: "Pleae enter Required Details",
+        title: "Oops !! Pleae enter the new Transaction Details Again",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -91,11 +92,15 @@ const Form = () => {
       isClosable: true,
       position: "bottom",
     });
+
     addTransaction({
       ...formData,
       amount: Number(formData.amount),
       id: uuidv4(),
     });
+
+    setDatePicker(new Date());
+
     setFormData(initialState);
   };
 
@@ -125,12 +130,11 @@ const Form = () => {
           <option
             value="Income"
             cursor="pointer"
-            style={{ backgroundColor: "orange" }}
-            _hover={{ backgroundColor: "yellow" }}
+            style={{ background: "purple", color:"yellow" }}
           >
             Income
           </option>
-          <option value="Expense" style={{ backgroundColor: "orange" }}>
+          <option value="Expense" style={{ background: "purple", color:"yellow" }}>
             Expense
           </option>
         </Select>
@@ -147,8 +151,8 @@ const Form = () => {
           focusBorderColor="pink.500"
         >
           {selectedCategories.map((c) => (
-            <option
-              style={{ backgroundColor: "orange", color: "red" }}
+            <option bg="purple.900"
+              style={{ background: "purple", color:"yellow" }}
               key={c.type}
               value={c.type}
             >
