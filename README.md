@@ -2,6 +2,13 @@
 
 > Track your income and expenses in one place via detailed graphical information to manage your budget.
 
+Manage your budget and transactions.
+Add income & expense and compare your transactions throught their percentage 
+contribution in your income and expenses via easy & descriptive graphical represented data.
+Keep a record of your transactions and manage them  in the user profile section.
+
+**Its simple yet sooths your eye, fully featured and easy to use application**
+
 Made using [React JS](https://reactjs.org/docs/getting-started.html). This application is powered by [Firebase](https://firebase.google.com/)
 
 This is a _responsive web application_ for viewing in both Mobile and Desktop.
@@ -21,17 +28,16 @@ please open an issue first to discuss what you would like to change.
 ## Features
 
 - User Profile.
-- Google Login.
-- Full featured wishlist functionality.
-- Graphical data representation feature.
+- Login & Signup.
+- Income and expenses profiles are graphically represented for quick understanding.
 - Authenticated user can access the CRUD functionality. 
-- Top crytpocurrency carousel.
-- All the data is stored in the firebase firestore database i.e. <i>persistent</i>
+- Manageable transaction list.
+- All the data is stored and saved i.e. <i>persistent</i>
 
 
 ## Tech Stack
 
-ReactJS, ChartJS, Material-UI, Firebase as a Backend Service, Firestore Database, Context 
+ReactJS, ChartJS, Chakra-UI, Firebase as a Backend Service. 
 
 ## Install Dependencies
 
