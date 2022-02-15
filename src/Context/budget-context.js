@@ -1,6 +1,9 @@
 import React from "react";
 
-export const initialState = JSON.parse(localStorage.getItem("transactions")) || [
+
+export const initialState = JSON.parse(
+  localStorage.getItem("transactions")
+) || [
   {
     amount: 500,
     category: "Salary",
@@ -36,7 +39,7 @@ export const initialState = JSON.parse(localStorage.getItem("transactions")) || 
     date: "2022-01-30",
     id: "0f72e66e-e144-4a72-bbc1-c3c92018635e",
   },
- 
+
   {
     amount: 420,
     category: "Rent",

@@ -34,7 +34,7 @@ const Provider = ({ children }) => {
     
   }, []);
 
-  console.log('user check uid, name, email', user);
+  //console.log('user check uid, name, email', user);
 
   return (
     <BudgetContext.Provider value={{ transactions, balance, deleteTransaction, addTransaction, user }}>
