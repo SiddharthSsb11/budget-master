@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Box, Text } from "@chakra-ui/layout";
+import React, { useState, useContext,  } from "react";
+import { Box,} from "@chakra-ui/layout";
 import { v4 as uuidv4 } from "uuid";
-import { useSpeechContext } from "@speechly/react-client";
+//import { useSpeechContext } from "@speechly/react-client";
 import formatDate from "../../../utils/formatDate";
 import {
   incomeCategories,
@@ -35,7 +35,7 @@ const Form = () => {
 
   //console.log("date", formatDate(datePicker));
 
-  const { segment } = useSpeechContext();
+  //const { segment } = useSpeechContext();
 
   const { addTransaction } = useContext(BudgetContext);
   const toast = useToast();

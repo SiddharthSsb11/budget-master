@@ -1,5 +1,5 @@
-import React, { useRef, useEffect, useContext } from "react";
-import { Box, Text } from "@chakra-ui/layout";
+import React, { useContext } from "react";
+import { Box, } from "@chakra-ui/layout";
 import { Heading } from "@chakra-ui/react";
 import { BudgetContext } from "../../context/budget-context";
 import Form from "./Form/Form";

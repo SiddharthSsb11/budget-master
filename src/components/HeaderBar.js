@@ -14,7 +14,7 @@ import {
 import { Button } from "@chakra-ui/button";
 import { Icon, Badge, Heading, Square } from "@chakra-ui/react";
 import { FaBalanceScale } from "react-icons/fa";
-import { MdOutlineAccountBalance } from "react-icons/md";
+//import { MdOutlineAccountBalance } from "react-icons/md";
 import { GiTakeMyMoney, GiReceiveMoney, GiPayMoney } from "react-icons/gi";
 import { Avatar } from "@chakra-ui/avatar";
 import { useToast } from "@chakra-ui/toast";

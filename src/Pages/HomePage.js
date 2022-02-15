@@ -1,5 +1,5 @@
-import React, { useEffect, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+//import { useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
@@ -19,7 +19,7 @@ import Alerts from "../components/Alerts";
 
 const HomePage = () => {
   const { user } = useContext(BudgetContext);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   /*   useEffect(() => {
     if (user) {

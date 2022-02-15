@@ -4,14 +4,13 @@ import HeaderBar from "../components/HeaderBar";
 import Details from "../components/Details/Details";
 import Main from "../components/Main/Main";
 import { BudgetContext } from "../context/budget-context";
-import { useNavigate } from "react-router-dom";
-import { Button } from "@chakra-ui/button";
+//import { useNavigate } from "react-router-dom";
 import Alerts from "../components/Alerts";
 
 const TransactionPage = () => {
   const { user } = useContext(BudgetContext);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   return (
     <React.Fragment>
