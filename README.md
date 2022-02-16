@@ -10,8 +10,8 @@ Keep a record of your transactions and manage them to save down the road.
 **Its simple, discriptive and easy to use application**
 
 ```
-(_Few transactions are added beforehand for UI/UX purposes_. 
-_You can always manage/delete them too._)
+Few transactions are added beforehand for UI/UX purposes. 
+You can always manage/delete them too.
 ```
 
 Made using [React JS](https://reactjs.org/docs/getting-started.html). This application is powered by [Firebase](https://firebase.google.com/)
