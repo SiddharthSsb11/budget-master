@@ -2,14 +2,16 @@ import React, { useContext } from "react";
 import { BudgetContext } from "../context/budget-context";
 import { Box, Text } from "@chakra-ui/layout";
 import { Icon, Circle } from "@chakra-ui/react";
-import { DeleteIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { FaRupeeSign } from "react-icons/fa";
 import { List, ListItem, IconButton } from "@chakra-ui/react";
 import { useToast } from "@chakra-ui/toast";
+import { useNavigate } from "react-router-dom";
 
 const TransactionList = () => {
   const { transactions, deleteTransaction } = useContext(BudgetContext);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const deleteHandler = (id) => {
     console.log("delete clicked", id);
@@ -84,17 +86,32 @@ const TransactionList = () => {
               </Text>
             </Box>
           </Box>
+          <Box>
           <IconButton
-            variant="ghost"
-            bg="gray.700"
-            color="white"
-            size="lg"
-            fontSize="2xl"
-            _hover={{ background: "gray.800", color: "red.500" }}
-            aria-label="Delete Transaction"
-            icon={<DeleteIcon />}
-            onClick={deleteHandler.bind(null, transaction.id)}
-          />
+          variant="ghost"
+          bg="gray.700"
+          color="white"
+          size="lg"
+          fontSize="2xl"
+          _hover={{ background: "gray.700", color: "blue.400" }}
+          aria-label="Delete Transaction"
+          icon={<EditIcon />}
+          mr={2}
+          onClick={()=>navigate(`/${transaction.id}`)}
+        />
+          <IconButton
+          variant="ghost"
+          bg="gray.700"
+          color="white"
+          size="lg"
+          fontSize="2xl"
+          _hover={{ background: "gray.800", color: "red.500" }}
+          aria-label="Delete Transaction"
+          icon={<DeleteIcon />}
+          onClick={deleteHandler.bind(null, transaction.id)}
+        />
+          </Box>
+          
         </ListItem>
       ))}
     </List>
