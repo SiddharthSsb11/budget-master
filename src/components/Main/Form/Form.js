@@ -61,6 +61,7 @@ const Form = () => {
   };
 
   const createTransaction = () => {
+    //e.preventDefault();
     setFormData({ ...formData, date: formatDate(datePicker) });
     //console.log("Created Transaction", formData);
 

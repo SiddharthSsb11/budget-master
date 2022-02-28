@@ -13,6 +13,8 @@ const Provider = ({ children }) => {
 
   //const { isOpen, /* onOpen, onClose */ } = useDisclosure();
 
+  const [editTransaction, setEditTransaction] = useState(null);
+
   const deleteTransaction = (id) => {
     dispatch({ type: 'DELETE_TRANSACTION', payload: id });
   };

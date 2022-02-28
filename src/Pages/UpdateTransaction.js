@@ -27,7 +27,7 @@ const initialState = {
 };
 
 const UpdateTransaction = () => {
-  const [trData, setTrData] = useState({});
+  const [trData, setTrData] = useState({});//useState(null)
   const [formData, setFormData] = useState(initialState);
   const [datePicker, setDatePicker] = useState(new Date());
   //const [amount, setAmount] = useState(Number);
