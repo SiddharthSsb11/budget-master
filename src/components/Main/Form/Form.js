@@ -48,7 +48,7 @@ const Form = () => {
 
   //const { segment } = useSpeechContext();
 
-  const { addTransaction, editTransaction, deleteTransaction } = useContext(BudgetContext);
+  const { addTransaction, editTransaction, deleteTransaction, setEditTransaction } = useContext(BudgetContext);
   const toast = useToast();
 
   //console.log(formData, "formData state");
@@ -156,7 +156,8 @@ const Form = () => {
     setTransactionType("Income");
     setAmount("");
     setCategory("");
-
+    setEditTransaction(null);   
+     
     //console.log(amount);
     setLoading(false);
     //setFormData(initialState);
@@ -296,7 +297,7 @@ const Form = () => {
         marginTop="3px"
         onClick={createTransaction}
       >
-        Create Transaction
+        {editTransaction ? "Edit Transaction" : "Create Transaction"}
       </Button>
     </Box>
   );
