@@ -15,10 +15,12 @@ const contextReducer = (state, action) => {
 
     case "ADD_TRANSACTION":
       transactions = [action.payload, ...state];
-
+ 
       localStorage.setItem("transactions", JSON.stringify(transactions));
       console.log(transactions, "adding a transaction");
+      //window.location.reload()
       return transactions;
+
 
     default:
       return state;

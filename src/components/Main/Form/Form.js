@@ -1,5 +1,5 @@
-import React, { useState, useContext,  } from "react";
-import { Box,} from "@chakra-ui/layout";
+import React, { useState, useContext } from "react";
+import { Box } from "@chakra-ui/layout";
 import { v4 as uuidv4 } from "uuid";
 //import { useSpeechContext } from "@speechly/react-client";
 import formatDate from "../../../utils/formatDate";
@@ -8,30 +8,40 @@ import {
   expenseCategories,
 } from "../../../constants/categories";
 import { BudgetContext } from "../../../context/budget-context";
-import { NumberInput, NumberInputField } from "@chakra-ui/react";
-import { FormControl, FormLabel } from "@chakra-ui/react";
+import {
+  NumberInput,
+  NumberInputField,
+  FormControl,
+  FormLabel,
+  Spinner,
+  Select,
+} from "@chakra-ui/react";
 import {
   InputGroup,
   InputRightElement,
   InputLeftElement,
 } from "@chakra-ui/input";
-import { Select } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/button";
 import { CalendarIcon } from "@chakra-ui/icons";
-import { SingleDatepicker } from "chakra-dayzed-datepicker";
+//import { SingleDatepicker } from "chakra-dayzed-datepicker";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
 import { useToast } from "@chakra-ui/toast";
 
-const initialState = {
+/* const initialState = {
   amount: 0,
   category: "",
   type: "Income",
   date: formatDate(new Date()),
-};
+}; */
 
 const Form = () => {
-  const [formData, setFormData] = useState(initialState);
+  ///const [formData, setFormData] = useState(initialState);
   const [datePicker, setDatePicker] = useState(new Date());
-  //const [amount, setAmount] = useState(Number);
+  const [category, setCategory] = useState("");
+  const [transactionType, setTransactionType] = useState("Income");
+  const [amount, setAmount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   //console.log("date", formatDate(datePicker));
 
@@ -43,36 +53,39 @@ const Form = () => {
   //console.log(formData, "formData state");
 
   const selectedCategories =
-    formData.type === "Income" ? incomeCategories : expenseCategories;
+    transactionType === "Income" ? incomeCategories : expenseCategories;
 
   const typeHandler = (e) => {
     //console.log("Transaction Type: ", e.target.value);
-    setFormData({ ...formData, type: e.target.value });
+    //setFormData({ ...formData, type: e.target.value });
+    setTransactionType(e.target.value);
   };
 
   const categoryHandler = (e) => {
     //console.log("Category Type: ", e.target.value);
-    setFormData({ ...formData, category: e.target.value });
+    //setFormData({ ...formData, category: e.target.value });
+    setCategory(e.target.value);
   };
 
   const amountHandler = (e) => {
-    console.log("Amount: ", e.target.value);
-    setFormData({ ...formData, amount: e.target.value });
+    //console.log("Amount: ", e.target.value);
+    //setFormData({ ...formData, amount: e.target.value });
+    setAmount(e.target.value);
   };
 
   const createTransaction = () => {
     //e.preventDefault();
-    setFormData({ ...formData, date: formatDate(datePicker) });
+    //setFormData({ ...formData, date: formatDate(datePicker) });
     //console.log("Created Transaction", formData);
-
+    //console.log(amount, category, transactionType, datePicker);
     if (
-      Number.isNaN(Number(formData.amount)) ||
-      !formData.date.includes("-") ||
-      Number(formData.amount) < 1 ||
-      formData.category.length === 0
+      Number.isNaN(Number(amount)) ||
+      !datePicker.includes(" ") ||
+      Number(amount) < 1 ||
+      category.length === 0
     ) {
       toast({
-        title: "Oops!! Please check & enter new Transaction Details Again",
+        title: "Something Went Wrong !! Please enter Transaction Details Again",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -81,13 +94,13 @@ const Form = () => {
       return;
     }
 
-    if (incomeCategories.map((iC) => iC.type).includes(formData.category)) {
-      setFormData({ ...formData, type: "Income" });
-    } else if (
-      expenseCategories.map((iC) => iC.type).includes(formData.category)
-    ) {
-      setFormData({ ...formData, type: "Expense" });
+    if (incomeCategories.map((iC) => iC.type).includes(category)) {
+      setTransactionType("Income");
+    } else if (expenseCategories.map((iC) => iC.type).includes(category)) {
+      setTransactionType("Expense");
     }
+
+    setLoading(true);
 
     toast({
       title: "Transaction Successful",
@@ -98,135 +111,159 @@ const Form = () => {
     });
 
     addTransaction({
-      ...formData,
-      amount: Number(formData.amount),
+      amount: Number(amount),
+      category: category,
+      type: transactionType,
+      date: datePicker,
       id: uuidv4(),
     });
 
-    setDatePicker(new Date());
+    setDatePicker("");
+    setTransactionType("Income");
+    setAmount(0);
+    setCategory(new Date());
 
-    setFormData(initialState);
+    setLoading(false);
+    //setFormData(initialState);
   };
 
-  
+  //Thu Mar 10 2022 12:00:00 GMT+0530 (India Standard Time)
 
   return (
-
-
-      <Box
-        d="flex"
-        //bg="blue.300"
-        justifyContent="space-between"
-        p={1}
-        width="100%"
-        alignItems="center"
-        flexWrap="wrap"
-        rowGap={5}
-        color="gray.200"
-      >
-        <FormControl width="47%">
-          <FormLabel htmlFor="type">Type</FormLabel>
-          <Select
-            id="type"
-            value={formData.type}
-            onChange={typeHandler}
-            //bg="purple"
-            cursor="pointer"
-            border="2px solid"
-            focusBorderColor="pink.500"
-          >
-            <option
-              value="Income"
+    <Box
+      d="flex"
+      //bg="blue.300"
+      justifyContent="space-between"
+      p={1}
+      width="100%"
+      alignItems="center"
+      flexWrap="wrap"
+      rowGap={5}
+      color="gray.200"
+    >
+      {loading ? (
+        <Spinner
+          size="2xl"
+          w={12}
+          h={12}
+          alignSelf="center"
+          margin="auto"
+          color="pink.600"
+        />
+      ) : (
+        <>
+          <FormControl width="47%" isRequired>
+            <FormLabel htmlFor="type">Type</FormLabel>
+            <Select
+              id="type"
+              value={transactionType}
+              onChange={typeHandler}
+              //bg="purple"
               cursor="pointer"
-              style={{ background: "purple", color: "white" }}
+              border="2px solid"
+              focusBorderColor="pink.500"
             >
-              Income
-            </option>
-            <option
-              value="Expense"
-              style={{ background: "purple", color: "white" }}
-            >
-              Expense
-            </option>
-          </Select>
-        </FormControl>
-
-        <FormControl width="47%">
-          <FormLabel htmlFor="category">Category</FormLabel>
-          <Select
-            id="category"
-            //placeholder="Category"
-            value={formData.category}
-            onChange={categoryHandler}
-            cursor="pointer"
-            border="2px solid"
-            focusBorderColor="pink.500"
-          >
-            {selectedCategories.map((c) => (
               <option
-                bg="purple.900"
+                value="Income"
+                cursor="pointer"
                 style={{ background: "purple", color: "white" }}
-                key={c.type}
-                value={c.type}
               >
-                {c.type}
+                Income
               </option>
-            ))}
-          </Select>
-        </FormControl>
+              <option
+                value="Expense"
+                style={{ background: "purple", color: "white" }}
+              >
+                Expense
+              </option>
+            </Select>
+          </FormControl>
 
-        <FormControl width="47%">
-          <FormLabel htmlFor="amount">Amount</FormLabel>
-          <NumberInput max={50000000000} min={1}>
-            <InputGroup focusBorderColor="pink.500">
-              <InputLeftElement
-                pointerEvents="none"
-                color="gray.300"
-                fontSize="1.2em"
-                children="₹"
+          <FormControl width="47%" isRequired>
+            <FormLabel htmlFor="category">Category</FormLabel>
+            <Select
+              id="category"
+              //placeholder="Category"
+              value={category}
+              onChange={categoryHandler}
+              cursor="pointer"
+              border="2px solid"
+              focusBorderColor="pink.500"
+            >
+              {selectedCategories.map((c) => (
+                <option
+                  bg="purple.900"
+                  style={{ background: "purple", color: "white" }}
+                  key={c.type}
+                  value={c.type}
+                >
+                  {c.type}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+
+          <FormControl width="47%" isRequired>
+            <FormLabel htmlFor="amount">Amount</FormLabel>
+            <NumberInput max={50000000000} min={1}>
+              <InputGroup focusBorderColor="pink.500">
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  fontSize="1.2em"
+                  children="₹"
+                />
+                <NumberInputField
+                  border="2px solid"
+                  id="amount"
+                  placeholder="Enter Amount"
+                  value={amount}
+                  paddingLeft="2em"
+                  onChange={amountHandler}
+                />
+              </InputGroup>
+            </NumberInput>
+          </FormControl>
+
+          <FormControl width="47%" isRequired>
+            <FormLabel htmlFor="date">Date</FormLabel>
+            <InputGroup focusBorderColor="pink.500" /* color="gray.500" */>
+              <DayPickerInput
+                style={{
+                  border: "2px solid",
+                  color: "gray",
+                  height: "100%",
+                  width: "100%",
+                  padding: "0.4em",
+                  borderRadius: "7px",
+                }}
+                onDayChange={
+                  (day) => setDatePicker(formatDate(day)) /* console.log(day) */
+                }
               />
-              <NumberInputField
-                border="2px solid"
-                id="amount"
-                placeholder="Enter Amount"
-                value={formData.amount}
-                paddingLeft="2em"
-                onChange={amountHandler}
+              <InputRightElement
+                pointerEvents="none"
+                //color="black"
+                fontSize="1em"
+                mr={2.5}
+                children={<CalendarIcon color="gray.500" />}
               />
             </InputGroup>
-          </NumberInput>
-        </FormControl>
+          </FormControl>
+        </>
+      )}
 
-        <FormControl width="47%">
-          <FormLabel htmlFor="date">Date</FormLabel>
-          <InputGroup focusBorderColor="pink.500" color="gray.500">
-            <SingleDatepicker
-              style={{ border: "2px solid", color: "gray" }}
-              name="date"
-              date={datePicker}
-              onDateChange={setDatePicker}
-            />
-            <InputRightElement
-              pointerEvents="none"
-              //color="black"
-              fontSize="1em"
-              children={<CalendarIcon color="gray.300" />}
-            />
-          </InputGroup>
-        </FormControl>
-
-        <Button
-          fontWeight="bold"
-          fontSize="lg"
-          colorScheme="pink"
-          width="100%"
-          marginTop="3px"
-          onClick={createTransaction}
-        >
-          Create Transaction
-        </Button>
-      </Box>
-    
+      <Button
+        fontWeight="bold"
+        fontSize="lg"
+        colorScheme="pink"
+        width="100%"
+        marginTop="3px"
+        onClick={createTransaction}
+      >
+        Create Transaction
+      </Button>
+    </Box>
   );
 };
 
