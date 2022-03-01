@@ -48,8 +48,7 @@ const Form = () => {
 
   //const { segment } = useSpeechContext();
 
-  const { addTransaction, editTransaction, editSingleTransaction } =
-    useContext(BudgetContext);
+  const { addTransaction, editTransaction, deleteTransaction } = useContext(BudgetContext);
   const toast = useToast();
 
   //console.log(formData, "formData state");
@@ -87,7 +86,6 @@ const Form = () => {
       setTransactionType("Income");
       setAmount("");
       setCategory("");
-      
     }
    
   }, [editTransaction]);
@@ -120,27 +118,44 @@ const Form = () => {
     }
 
     setLoading(true);
-
-    toast({
-      title: "Transaction Successful",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "bottom",
-    });
-
-    addTransaction({
-      amount: Number(amount),
-      category: category,
-      type: transactionType,
-      date: datePicker,
-      id: uuidv4(),
-    });
-
+    if(!editTransaction){
+      toast({
+        title: "Transaction Successful",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+  
+      addTransaction({
+        amount: Number(amount),
+        category: category,
+        type: transactionType,
+        date: datePicker,
+        id:uuidv4() ,
+      });
+    }else{
+      deleteTransaction(editTransaction.id);
+      addTransaction({
+        amount: Number(amount),
+        category: category,
+        type: transactionType,
+        date: datePicker,
+        id: uuidv4()
+      });
+      toast({
+        title: "Transaction Updated Successfully",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  
     setDatePicker("");
     setTransactionType("Income");
     setAmount("");
-    setCategory(new Date());
+    setCategory("");
 
     //console.log(amount);
     setLoading(false);
