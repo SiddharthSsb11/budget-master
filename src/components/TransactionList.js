@@ -9,7 +9,8 @@ import { useToast } from "@chakra-ui/toast";
 import { useNavigate } from "react-router-dom";
 
 const TransactionList = () => {
-  const { transactions, deleteTransaction } = useContext(BudgetContext);
+  const { transactions, deleteTransaction, findTransaction } =
+    useContext(BudgetContext);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -53,7 +54,6 @@ const TransactionList = () => {
           bg="yellow.300"
           width="100%"
           p={1.5}
-          
           cursor="pointer"
           _hover={{ background: "yellow.400" }}
         >
@@ -87,31 +87,30 @@ const TransactionList = () => {
             </Box>
           </Box>
           <Box>
-          <IconButton
-          variant="ghost"
-          bg="gray.700"
-          color="white"
-          size="lg"
-          fontSize="2xl"
-          _hover={{ background: "gray.700", color: "blue.400" }}
-          aria-label="Delete Transaction"
-          icon={<EditIcon />}
-          mr={2}
-          onClick={()=>navigate(`/${transaction.id}`)}
-        />
-          <IconButton
-          variant="ghost"
-          bg="gray.700"
-          color="white"
-          size="lg"
-          fontSize="2xl"
-          _hover={{ background: "gray.800", color: "red.500" }}
-          aria-label="Delete Transaction"
-          icon={<DeleteIcon />}
-          onClick={deleteHandler.bind(null, transaction.id)}
-        />
+            <IconButton
+              variant="ghost"
+              bg="gray.700"
+              color="white"
+              size="lg"
+              fontSize="2xl"
+              _hover={{ background: "gray.700", color: "blue.400" }}
+              aria-label="Delete Transaction"
+              icon={<EditIcon />}
+              mr={2}
+              onClick={/* findTransaction.bind(null, transaction.id) */ ()=>findTransaction(transaction.id)}
+            />
+            <IconButton
+              variant="ghost"
+              bg="gray.700"
+              color="white"
+              size="lg"
+              fontSize="2xl"
+              _hover={{ background: "gray.800", color: "red.500" }}
+              aria-label="Delete Transaction"
+              icon={<DeleteIcon />}
+              onClick={deleteHandler.bind(null, transaction.id)}
+            />
           </Box>
-          
         </ListItem>
       ))}
     </List>

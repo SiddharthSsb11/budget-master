@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Box } from "@chakra-ui/layout";
 import { v4 as uuidv4 } from "uuid";
 //import { useSpeechContext } from "@speechly/react-client";
@@ -15,6 +15,7 @@ import {
   FormLabel,
   Spinner,
   Select,
+  Input
 } from "@chakra-ui/react";
 import {
   InputGroup,
@@ -28,26 +29,27 @@ import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import { useToast } from "@chakra-ui/toast";
 
-/* const initialState = {
-  amount: 0,
+const initialState = {
+  amount: "",
   category: "",
   type: "Income",
   date: formatDate(new Date()),
-}; */
+};
 
 const Form = () => {
   ///const [formData, setFormData] = useState(initialState);
-  const [datePicker, setDatePicker] = useState(new Date());
+  const [datePicker, setDatePicker] = useState("");
   const [category, setCategory] = useState("");
   const [transactionType, setTransactionType] = useState("Income");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(initialState.amount);
   const [loading, setLoading] = useState(false);
 
   //console.log("date", formatDate(datePicker));
 
   //const { segment } = useSpeechContext();
 
-  const { addTransaction } = useContext(BudgetContext);
+  const { addTransaction, editTransaction, editSingleTransaction } =
+    useContext(BudgetContext);
   const toast = useToast();
 
   //console.log(formData, "formData state");
@@ -73,6 +75,23 @@ const Form = () => {
     setAmount(e.target.value);
   };
 
+  useEffect(() => {
+    if (editTransaction) {
+      setDatePicker(editTransaction.date);
+      setAmount(editTransaction.amount);
+      setCategory(editTransaction.category);
+      setTransactionType(editTransaction.type);
+      console.log("edit clicked");
+    } else {
+      setDatePicker("");
+      setTransactionType("Income");
+      setAmount("");
+      setCategory("");
+      
+    }
+   
+  }, [editTransaction]);
+
   const createTransaction = () => {
     //e.preventDefault();
     //setFormData({ ...formData, date: formatDate(datePicker) });
@@ -85,7 +104,7 @@ const Form = () => {
       category.length === 0
     ) {
       toast({
-        title: "Something Went Wrong !! Please enter Transaction Details Again",
+        title: "Something Went Wrong ! Enter required Details Again",
         status: "warning",
         duration: 5000,
         isClosable: true,
@@ -120,9 +139,10 @@ const Form = () => {
 
     setDatePicker("");
     setTransactionType("Income");
-    setAmount(0);
+    setAmount("");
     setCategory(new Date());
 
+    //console.log(amount);
     setLoading(false);
     //setFormData(initialState);
   };
@@ -213,7 +233,7 @@ const Form = () => {
                   fontSize="1.2em"
                   children="₹"
                 />
-                <NumberInputField
+                <Input
                   border="2px solid"
                   id="amount"
                   placeholder="Enter Amount"
